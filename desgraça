@@ -1,0 +1,76 @@
+package bts;
+import robocode.*;
+//import java.awt.Color;
+
+// API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
+
+/**
+ * Ralos - a robot by (your name here)
+ */
+public class Ralos extends Robot
+{
+
+	public void run() {
+	
+		while(true) {
+		
+			ahead(100);
+			turnGunRight(360);
+			back(100);
+			turnGunRight(360);
+		}
+	}
+
+
+public void onHitRobot(HitRobotEvent INI) {
+	
+    turnRight(INI.getBearing()); 
+	back(50);
+    fire(3);
+}
+
+public void mira(double Adv) {
+	double A=getHeading()+Adv-getGunHeading();
+	if (!(A > -180 && A <= 180)) {
+		while (A <= -180) {
+			A += 360;
+		}
+		while (A > 180) {
+			A -= 360;
+		}
+	}
+	turnGunRight(A);
+}
+
+
+	public void onScannedRobot(ScannedRobotEvent e) {
+   
+  mira(e.getBearing());
+ fire(2);
+	ahead(90);
+	back(50);
+	}
+
+	/**
+	 * onHitByBullet: What to do when you're hit by a bullet
+	 */
+	public void onHitByBullet(HitByBulletEvent e) {
+	
+		back(40);
+	}
+	
+	
+	public void onHitWall(HitWallEvent e) {
+    
+    back(10);
+  turnRight(20);   
+  ahead(1);
+
+	}
+		// Replace the next line with any behavior you would like
+
+	}	 
+
+
+
+	
